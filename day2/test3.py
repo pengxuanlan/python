@@ -10,7 +10,7 @@ for line in f:
 data = eval(file_str)   # 字符串转换成字典
 name = input("请输入用户姓名：")
 while name.strip() == '':    # 判断用户名是否为空，如果为空就要求用户输入
-    print("用户名不能为空，请重新输入！")
+    print('''\033[32;1m用户名不能为空，请重新输入！\033''')
     name = input("请输入用户姓名:")
     continue
 password = input("请输入用户密码：")
@@ -18,10 +18,10 @@ while True:
     if name in data:
         if password in data[name]:
             salay = int(data[name][password]) # 读取用户表中的余额,转成数字格式
-            print("登录成功，您的余额为：",salay)
+            print('''\033[32;1m登录成功，您的余额为：%s\033'''%salay)
             break
         else:
-            print("密码错误，请重新输入密码")
+            print('''\033[32;1m密码错误，请重新输入密码\033''')
             password = input("请输入输入密码:")
             continue
     else:
@@ -34,7 +34,7 @@ while True:
         file.seek(0)  # 移动文件首
         file.write(str(data))  # 追加写入
         file.tell()
-        print("注册成功，当前余额为：",password_salay)
+        print('''\033[32;1m注册成功，%s你好，您当前余额为：%s\033'''%(name,salay))
         break
 list_spqd = [    # 商品清单
     ["iphone7", 7088],
@@ -71,7 +71,7 @@ while not exit_set:   # 此处开始购物
         file.tell()
         print("购物清单如下：")
         print(shopping_list_now)   # 打印购物清单
-        print("您的余额为：", salay)
+        print('''\033[32;1m您的余额为：%s\033''' %salay)
         shopping_list_ls.extend(shopping_list_now)   # 购物历史记录扩展当前记录
         # print(shopping_list[name])
         shopping_list[name] = shopping_list_ls   # 对应用户名称 ，方便下次调用
@@ -86,7 +86,7 @@ while not exit_set:   # 此处开始购物
         num_buy = int(num)-1
         if list_spqd[num_buy][1] < (salay):
             salay = salay-int(list_spqd[num_buy][1])
-            print("商品",list_spqd[num_buy][0],"加入购物车成功！余额为:",salay)
+            print('''\033[32;1m商品%s,加入购物车成功！余额为:%s\033''' % (list_spqd[num_buy][0],salay))
             shopping_list_now.append(list_spqd[num_buy])
         else:
             print("余额不足")
