@@ -16,10 +16,9 @@ while name.strip() == '':    # 判断用户名是否为空，如果为空就要�
 password = input("请输入用户密码：")
 while True:
     if name in data:
-
         if password in data[name]:
-            salay_yue = int(data[name][password]) # 读取用户表中的余额,转成数字格式
-            print("登录成功，您的余额为：",salay_yue)
+            salay = int(data[name][password]) # 读取用户表中的余额,转成数字格式
+            print("登录成功，您的余额为：",salay)
             break
         else:
             print("密码错误，请重新输入密码")
@@ -29,6 +28,7 @@ while True:
         password_salay = {}   # 定义空字典
         salay_str = input("首次登录，请输入您的工资：")   # 首次登录，输入工资
         salay = int(salay_str)  # 输入的工资转化成数字格式
+
         password_salay[password] = salay  # 把工资写入字典
         data[name] = password_salay  # 把名称写入字典
         file.seek(0)  # 移动文件首
@@ -62,18 +62,32 @@ while not exit_set:   # 此处开始购物
 
 
     num = input("请输入想购买的商品编号：")
-    if num.isdigit()== False:   # 判断输入是否为整数
+
+    if num == 'q':
+        exit_set = True
+        data[name][password] = str(salay)
+        file.seek(0)
+        file.write(str(data))
+        file.tell()
+        print("购物清单如下：")
+        print(shopping_list_now)
+        print("您的余额为：", salay)
+        shopping_list_ls.extend(shopping_list_now)
+        shopping_list[name] = shopping_list_ls
+        file_list.seek(0)
+        file_list.write(str(shopping_list_ls))
+        file_list.tell()
+    elif num.isdigit()== False:   # 判断输入是否为整数
         print("输入错误！请输入整数")   # 转换成数值
     elif int(num)>int(len(list_spqd)) or int(num) <=0:
         print("输入错误，超出商品列表范围")
-    elif num == 'q':
-        exit_set = True
+
     else:
         num_buy = int(num)-1
         if list_spqd[num_buy][1] < (salay):
             salay = salay-int(list_spqd[num_buy][1])
             print("商品",list_spqd[num_buy][0],"加入购物车成功！余额为:",salay)
-            shopping_list_now.append(list_spqd[num])
+            shopping_list_now.append(list_spqd[num_buy])
         else:
             print("余额不足")
 
