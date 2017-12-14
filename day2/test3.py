@@ -65,23 +65,23 @@ while not exit_set:   # 此处开始购物
 
     if num == 'q':
         exit_set = True
-        data[name][password] = str(salay)
+        data[name][password] = str(salay)   # 把工资对应到帐号和密码上面，写入用户表中
         file.seek(0)
-        file.write(str(data))
+        file.write(str(data))   # 写入用户表
         file.tell()
         print("购物清单如下：")
-        print(shopping_list_now)
+        print(shopping_list_now)   # 打印购物清单
         print("您的余额为：", salay)
-        shopping_list_ls.extend(shopping_list_now)
-        shopping_list[name] = shopping_list_ls
+        shopping_list_ls.extend(shopping_list_now)   # 购物历史记录扩展当前记录
+        # print(shopping_list[name])
+        shopping_list[name] = shopping_list_ls   # 对应用户名称 ，方便下次调用
         file_list.seek(0)
-        file_list.write(str(shopping_list_ls))
+        file_list.write(str(shopping_list))   # 写入购物历史记录
         file_list.tell()
     elif num.isdigit()== False:   # 判断输入是否为整数
         print("输入错误！请输入整数")   # 转换成数值
     elif int(num)>int(len(list_spqd)) or int(num) <=0:
         print("输入错误，超出商品列表范围")
-
     else:
         num_buy = int(num)-1
         if list_spqd[num_buy][1] < (salay):
