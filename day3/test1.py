@@ -1,5 +1,5 @@
 # Author:pjf
-# github=https://github.com/pengxuanlan/python
+# github=https://github.com/pengxuanlan/python/tree/master/day3
 # time:2017-12-15 9:00
 # file = open("info.txt","r+",encoding="utf-8")
 
