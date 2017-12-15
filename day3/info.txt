@@ -1,0 +1,8 @@
+alx 100000
+Rain 80000
+Egon 50000
+Yuan 30000
+pjf 20000
+pjf 2000
+pjf1 111
+pjf2 333
